@@ -1,3 +1,11 @@
+/*
+ * @Auther: xinhong.gong
+ * @Date: 2023-11-19 23:04:14
+ * @LastEditors: xinhong.gong xinhong.gong@guojutech.net
+ * @LastEditTime: 2023-11-26 12:00:04
+ * @FilePath: /small-days/App.tsx
+ * @Description:
+ */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -5,9 +13,10 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React, {useEffect} from 'react';
+import axios from 'axios';
 import {
+  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -24,95 +33,46 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Navigator from 'src/navigator';
+import {useRequest} from 'ahooks';
+import {
+  useNavigationContainerRef,
+  useNavigation,
+} from '@react-navigation/native';
+import {useFlipper} from '@react-navigation/devtools';
+import {initializeMMKVFlipper} from 'react-native-mmkv-flipper-plugin';
+import {configurePersistable} from 'mobx-persist-store';
+import {MMKV} from 'react-native-mmkv';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+const storage = new MMKV();
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
+// add this line inside your App.tsx
+if (__DEV__) {
+  initializeMMKVFlipper({default: storage});
 }
 
+configurePersistable({
+  storage: {
+    setItem: (key: string, data: any) => storage.set(key, data),
+    getItem: (key: string) => storage.getString(key) || null,
+    removeItem: (key: string) => storage.delete(key),
+  },
+  // expireIn: 1000 * 3600 * 24 * 10, // 10天到期，默认无限期
+  // removeOnExpiration: true, // 到期后删除
+  stringify: true,
+});
+
 function App(): JSX.Element {
+  const navigationRef = useNavigationContainerRef();
+  useFlipper(navigationRef);
+
   const isDarkMode = useColorScheme() === 'dark';
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+  return <Navigator />;
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
