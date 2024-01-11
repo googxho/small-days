@@ -25,7 +25,7 @@ public class SmallDaysPackage implements ReactPackage {
     @Override
     public List<ViewManager> createViewManagers(@NonNull ReactApplicationContext reactApplicationContext) {
         List<ViewManager> viewManagers = new ArrayList<>();
-        // 添加注册自定义的组件
+        // 添加注册自定义的 ViewManager
         viewManagers.add(new InfoViewManager());
         return viewManagers;
     }

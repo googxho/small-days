@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+
     <ImageView
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginStart="10dp"
-        android:src="@drawable/kuki_icon"
         android:id="@+id/img_ku_ki"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="0dp"
         android:contentDescription="@string/app_name"
-        />
+        android:src="@drawable/kuki_icon" />
 
     <LinearLayout
+        android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -20,14 +22,14 @@
         <TextView
             android:id="@+id/text_view2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="72dp"
             android:text="KU_KI"
             android:textSize="48sp" />
 
         <TextView
             android:id="@+id/text_view3"
             android:layout_width="match_parent"
-            android:layout_height="195dp"
+            android:layout_height="236dp"
             android:text="所有人都祝你快乐，但我想对你说不快乐也没关系，焦头烂额也没关系，只希望你在自己的世界活得越来越逍遥舒心"
             android:textSize="24sp" />
     </LinearLayout>
