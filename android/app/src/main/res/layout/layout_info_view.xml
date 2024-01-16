@@ -5,18 +5,33 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/img_ku_ki"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginStart="0dp"
-        android:contentDescription="@string/app_name"
-        android:src="@drawable/kuki_icon" />
+
+    <LinearLayout
+        android:layout_width="174dp"
+        android:layout_height="224dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_ku_ki"
+            android:layout_width="match_parent"
+            android:layout_height="162dp"
+            android:layout_marginStart="0dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/kuki_icon" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="207dp"
+            android:layout_weight="1"
+            android:text="切换形状" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -24,13 +39,14 @@
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:text="KU_KI"
+            android:textColor="#03A9F4"
             android:textSize="48sp" />
 
         <TextView
             android:id="@+id/text_view3"
             android:layout_width="match_parent"
-            android:layout_height="236dp"
-            android:text="所有人都祝你快乐，但我想对你说不快乐也没关系，焦头烂额也没关系，只希望你在自己的世界活得越来越逍遥舒心"
+            android:layout_height="match_parent"
+            android:textColor="#F44336"
             android:textSize="24sp" />
     </LinearLayout>
 
