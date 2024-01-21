@@ -6,20 +6,25 @@
  * @Description:
  */
 
-import {runInAction, makeAutoObservable, observable} from 'mobx';
+import {runInAction, makeAutoObservable} from 'mobx';
 import {makePersistable} from 'mobx-persist-store';
 
 export class GlobalStore {
   userToken: string = 'ooo';
+  theme: string = 'light';
   constructor() {
     makeAutoObservable(this);
     makePersistable(this, {
-      name: 'GlobalStore',
+      name: 'globalStore',
       properties: ['userToken'],
     });
   }
 
   loading = false;
+
+  setTheme(theme: string) {
+    this.theme = theme;
+  }
 
   async login() {
     runInAction(() => {
@@ -36,5 +41,7 @@ export class GlobalStore {
     }
   }
 
-  async logout() {}
+  async logout() {
+    //
+  }
 }

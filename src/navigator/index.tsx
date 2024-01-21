@@ -6,8 +6,8 @@
  * @FilePath: /small-days/src/navigator/index.tsx
  * @Description:
  */
-import React, { useEffect } from 'react';
-import { observer } from 'mobx-react-lite';
+import React, {useEffect} from 'react';
+import {observer} from 'mobx-react-lite';
 import {
   CardStyleInterpolators,
   createStackNavigator,
@@ -18,15 +18,16 @@ import {
   NavigatorScreenParams,
 } from '@react-navigation/native';
 
-import MainTabScreen, { MainTabParamList } from './MainTab';
-import { DetailScreen } from '@pages/detail';
+import MainTabScreen, {MainTabParamList} from './MainTab';
+import DetailScreen from '@pages/detail';
 import LoginScreen from '@pages/login';
 import WelcomeScreen from '@pages/welcome';
-// import { TableScreen } from '@/pages/table';
+import HomeScreen from '@pages/home';
 
 export type RootStackParamList = {
   MainTab: NavigatorScreenParams<MainTabParamList>;
   Detail: undefined;
+  Home: undefined;
   H5: {
     url: string;
     title?: string;
@@ -43,7 +44,7 @@ export type RootStackNavigation = StackNavigationProp<RootStackParamList>;
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
-function RootStackScreen({ navigation }: { navigation: RootStackNavigation }) {
+function RootStackScreen({navigation}: {navigation: RootStackNavigation}) {
   const hideHeaderOptions = {
     title: '',
     headerBackTitle: '',
@@ -64,7 +65,7 @@ function RootStackScreen({ navigation }: { navigation: RootStackNavigation }) {
         <RootStack.Screen name="Welcome" component={WelcomeScreen} />
         <RootStack.Screen
           name="MainTab"
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
           component={MainTabScreen}
         />
         <RootStack.Screen
@@ -72,15 +73,15 @@ function RootStackScreen({ navigation }: { navigation: RootStackNavigation }) {
           options={hideHeaderOptions}
           component={DetailScreen}
         />
-        {/* <RootStack.Screen
-          name="Table"
-          options={hideHeaderOptions}
-          component={TableScreen}
-        /> */}
-      </RootStack.Group>
-      <RootStack.Group screenOptions={{ presentation: 'modal' }}>
         <RootStack.Screen
-          options={{ headerShown: false }}
+          name="Home"
+          options={hideHeaderOptions}
+          component={HomeScreen}
+        />
+      </RootStack.Group>
+      <RootStack.Group screenOptions={{presentation: 'modal'}}>
+        <RootStack.Screen
+          options={{headerShown: false}}
           name="Login"
           component={LoginScreen}
         />
