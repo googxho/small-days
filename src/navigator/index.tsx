@@ -59,6 +59,7 @@ function RootStackScreen({navigation}: {navigation: RootStackNavigation}) {
     <RootStack.Navigator
       initialRouteName="Welcome"
       screenOptions={{
+        headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
       <RootStack.Group>

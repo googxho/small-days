@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.23.3",
+    "@gongxh/rn-vant": "^1.0.0",
     "@react-native-community/netinfo": "^11.1.0",
     "@react-navigation/bottom-tabs": "^6.5.11",
     "@react-navigation/devtools": "^6.0.20",
@@ -24,6 +25,7 @@
     "babel-plugin-module-resolver": "^5.0.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-preset-mobx": "^2.0.0",
+    "expo-modules-core": "^1.11.7",
     "immer": "^10.0.3",
     "mobx": "^6.11.0",
     "mobx-persist-store": "^1.1.3",
