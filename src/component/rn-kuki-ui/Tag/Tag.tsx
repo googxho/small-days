@@ -1,11 +1,18 @@
-import React, { FC, useRef } from 'react';
-import { View, TouchableWithoutFeedback, StyleSheet, Text, Animated, Platform } from 'react-native';
-import type { TextStyle } from 'react-native';
+import React, {FC, useRef} from 'react';
+import {
+  View,
+  TouchableWithoutFeedback,
+  StyleSheet,
+  Text,
+  Animated,
+  Platform,
+} from 'react-native';
+import type {TextStyle} from 'react-native';
 import Icon from '../../rn-kuki-icons';
 
-import { useUpdateEffect } from '../hooks';
-import { useThemeFactory } from '../Theme';
-import type { TagProps } from './interface';
+import {useUpdateEffect} from '../hooks';
+import {useThemeFactory} from '../Theme';
+import type {TagProps} from './interface';
 import createStyle from './style';
 
 const Tag: FC<TagProps> = props => {
@@ -27,7 +34,7 @@ const Tag: FC<TagProps> = props => {
     onClose,
     hairline = false,
   } = props;
-  const { styles } = useThemeFactory(createStyle, {
+  const {styles} = useThemeFactory(createStyle, {
     color,
     textColor,
     plain,
@@ -47,12 +54,20 @@ const Tag: FC<TagProps> = props => {
     }).start();
   }, [show]);
 
-  const textStyleSummary: TextStyle = StyleSheet.flatten([styles.text, textStyle]);
+  const textStyleSummary: TextStyle = StyleSheet.flatten([
+    styles.text,
+    textStyle,
+  ]);
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <Animated.View style={[styles.tag, { opacity: fadeAnim }, style]}>
-        <View style={[styles.wrapper, mark ? styles.wrapperMark : null, innerStyle]}>
+      <Animated.View style={[styles.tag, {opacity: fadeAnim}, style]}>
+        <View
+          style={[
+            styles.wrapper,
+            mark ? styles.wrapperMark : null,
+            innerStyle,
+          ]}>
           <Text style={textStyleSummary}>{children}</Text>
           {closeable ? (
             <TouchableWithoutFeedback onPress={onClose}>

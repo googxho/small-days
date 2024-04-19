@@ -1,11 +1,15 @@
-import React, { useRef, useState } from 'react';
-import type { NativeSyntheticEvent, ImageLoadEventData, ImageErrorEventData } from 'react-native';
-import { View, Text, Animated, TouchableOpacity, Platform } from 'react-native';
+import React, {useRef, useState} from 'react';
+import type {
+  NativeSyntheticEvent,
+  ImageLoadEventData,
+  ImageErrorEventData,
+} from 'react-native';
+import {View, Text, Animated, TouchableOpacity, Platform} from 'react-native';
 import Icon from '../../rn-kuki-icons';
 
-import type { ImageProps } from './type';
+import type {ImageProps} from './type';
 import createStyles from './style';
-import { useTheme } from '../Theme';
+import {useTheme} from '../Theme';
 
 /**
  * Image 图片
@@ -42,7 +46,7 @@ const Image = (props: ImageProps): JSX.Element => {
         round,
         radius,
       }),
-    [round, radius, theme]
+    [round, radius, theme],
   );
 
   /**
@@ -81,11 +85,10 @@ const Image = (props: ImageProps): JSX.Element => {
       style={[Styles.wrapper, _showBackground && Styles.wrapperBg, style]}
       activeOpacity={theme.active_opacity}
       disabled={!onPress}
-      onPress={onPress}
-    >
+      onPress={onPress}>
       <Animated.Image
         {...resetProps}
-        style={[Styles.image, { opacity: ImageAnimated }, imageStyle]}
+        style={[Styles.image, {opacity: ImageAnimated}, imageStyle]}
         fadeDuration={fadeDuration}
         onLoad={onLoadImage}
         onError={onErrorImage}

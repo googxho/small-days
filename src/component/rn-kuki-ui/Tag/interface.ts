@@ -94,4 +94,5 @@ export interface TagProps {
    * @default true
    */
   hairline?: boolean;
+  children?: React.ReactNode;
 }

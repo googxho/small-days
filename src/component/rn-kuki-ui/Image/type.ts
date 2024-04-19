@@ -78,4 +78,5 @@ export interface ImageProps extends Omit<ImageReactNativeProps, 'style'> {
    */
   duration?: number;
   children?: React.ReactNode;
+  source: ImageReactNativeProps['source'];
 }
