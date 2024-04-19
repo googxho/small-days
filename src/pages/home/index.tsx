@@ -12,12 +12,13 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from 'src/navigator';
 import {MainTabParamList} from 'src/navigator/MainTab';
 import {observer} from 'mobx-react';
-import {Button, FlatList, Image, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
 import React, {useContext} from 'react';
 import {useStore} from '@stores/index';
 import {ThemeContext} from 'src/component/ThemeContext';
 import {FlashList} from '@shopify/flash-list';
 import acidList from 'src/assets/7791387030.json';
+import {Button, Cell} from 'src/component/rn-kuki-ui';
 
 type INavigateProps = CompositeScreenProps<
   BottomTabScreenProps<MainTabParamList, 'Me'>,
@@ -35,9 +36,7 @@ const _HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.content}>
-      <Text style={{fontSize: 20, color: 'red', marginTop: 20}}>home</Text>
       <Button
-        title="切换主题"
         onPress={() => {
           if (global.theme === 'dark') {
             global.setTheme('light');
@@ -47,9 +46,10 @@ const _HomeScreen: React.FC = () => {
           console.log('====================================');
           console.log(global, theme);
           console.log('====================================');
-        }}
-      />
-      <FlatList
+        }}>
+        切换主题HOME
+      </Button>
+      {/* <FlatList
         data={acidList}
         keyExtractor={item => item?.wid}
         renderItem={({item, index}) => (
@@ -70,7 +70,21 @@ const _HomeScreen: React.FC = () => {
             </View>
           </View>
         )}
-      />
+      /> */}
+      <Cell.Group title="按钮">
+        <Button plain type="primary">
+          朴素按钮
+        </Button>
+        <Button plain type="success">
+          朴素按钮
+        </Button>
+        <Button loading type="primary" />
+        <Button loading type="primary" loadingType="spinner" />
+        <Button loading type="success" loadingText="加载中..." />
+      </Cell.Group>
+      <Cell.Group title="分组2">
+        <Cell title="单元格" value="内容" />
+      </Cell.Group>
     </View>
   );
 };
@@ -82,10 +96,6 @@ const darkStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#353535',
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 64,
   },
 });
 
@@ -94,9 +104,5 @@ const lightStyles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#fafafa',
-    flexDirection: 'column',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 64,
   },
 });
