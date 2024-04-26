@@ -115,6 +115,12 @@ const LoginScreen: React.FC = () => {
           navigation.navigate('Home');
         }}
       />
+      <Button
+        title="跳转kuki-ui组件"
+        onPress={() => {
+          navigation.navigate('Example');
+        }}
+      />
       <Image
         style={styles.logo}
         source={{

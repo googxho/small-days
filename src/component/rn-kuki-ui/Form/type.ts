@@ -1,7 +1,12 @@
-import type { ReactNode, RefObject } from 'react';
-import type { StyleProp, ViewStyle } from 'react-native';
-import type { UseFormProps, FieldValues, UseControllerProps, UseFormReturn } from 'react-hook-form';
-import type { FieldProps } from '../Field';
+import type {ReactNode, RefObject} from 'react';
+import type {StyleProp, ViewStyle} from 'react-native';
+import type {
+  UseFormProps,
+  FieldValues,
+  UseControllerProps,
+  UseFormReturn,
+} from 'react-hook-form';
+import type {FieldProps} from '../Field';
 
 export type MemoInputProps = {
   value: unknown;
@@ -32,7 +37,8 @@ export type FieldSharedProps = Pick<
 >;
 
 export type FormLayout = 'vertical' | 'horizontal';
-export type FormInstance<V extends FieldValues = FieldValues> = UseFormReturn<V>;
+export type FormInstance<V extends FieldValues = FieldValues> =
+  UseFormReturn<V>;
 
 export interface FormProps<V extends FieldValues> extends UseFormProps<V> {
   /** 表单布局 */

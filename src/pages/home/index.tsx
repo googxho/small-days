@@ -12,7 +12,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from 'src/navigator';
 import {MainTabParamList} from 'src/navigator/MainTab';
 import {observer} from 'mobx-react';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useContext} from 'react';
 import {useStore} from '@stores/index';
 import {ThemeContext} from 'src/component/ThemeContext';
@@ -59,7 +59,7 @@ const _HomeScreen: React.FC = () => {
   const onDelete = () => Toast.info('删除');
 
   return (
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <Button
         onPress={() => {
           if (global.theme === 'dark') {
@@ -220,7 +220,7 @@ const _HomeScreen: React.FC = () => {
           <Tag type="warning">标签</Tag>
         </View>
       </Cell.Group>
-    </View>
+    </ScrollView>
   );
 };
 

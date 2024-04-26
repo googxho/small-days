@@ -1,13 +1,21 @@
 import React from 'react';
 import isUndefined from 'lodash-es/isUndefined';
-import { useController, useFormContext } from 'react-hook-form';
+import {useController, useFormContext} from 'react-hook-form';
 import Field from '../Field';
-import type { FormItemProps } from './type';
+import type {FormItemProps} from './type';
 
 const FormItem = (props: FormItemProps) => {
-  const { name, children, defaultValue, rules, shouldUnregister, required, ...fieldProps } = props;
-  const { control } = useFormContext();
-  const { field, fieldState } = useController({
+  const {
+    name,
+    children,
+    defaultValue,
+    rules,
+    shouldUnregister,
+    required,
+    ...fieldProps
+  } = props;
+  const {control} = useFormContext();
+  const {field, fieldState} = useController({
     control,
     name,
     defaultValue,
@@ -15,11 +23,13 @@ const FormItem = (props: FormItemProps) => {
     shouldUnregister,
   });
 
-  const isRequired = !isUndefined(required) ? required : rules && !!rules?.required;
+  const isRequired = !isUndefined(required)
+    ? required
+    : rules && !!rules?.required;
 
   const renderChildren = (child: React.ReactElement) => {
-    const { onChange, onBlur, value } = field;
-    return React.cloneElement(child, { ...child.props, onChange, onBlur, value });
+    const {onChange, onBlur, value} = field;
+    return React.cloneElement(child, {...child.props, onChange, onBlur, value});
   };
 
   return (
@@ -27,8 +37,7 @@ const FormItem = (props: FormItemProps) => {
       {...fieldProps}
       name={name}
       required={isRequired}
-      errorMessage={fieldState.error?.message}
-    >
+      errorMessage={fieldState.error?.message}>
       {React.isValidElement(children) ? renderChildren(children) : children}
     </Field>
   );

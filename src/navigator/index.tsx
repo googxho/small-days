@@ -6,7 +6,7 @@
  * @FilePath: /small-days/src/navigator/index.tsx
  * @Description:
  */
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {observer} from 'mobx-react-lite';
 import {
   CardStyleInterpolators,
@@ -23,6 +23,8 @@ import DetailScreen from '@pages/detail';
 import LoginScreen from '@pages/login';
 import WelcomeScreen from '@pages/welcome';
 import HomeScreen from '@pages/home';
+import ExampleScreen from '@pages/example-kuki-ui';
+import {MainPageScreen} from '@pages/main-page';
 
 export type RootStackParamList = {
   MainTab: NavigatorScreenParams<MainTabParamList>;
@@ -38,18 +40,48 @@ export type RootStackParamList = {
   Fs: undefined;
   Camera: undefined;
   Table: undefined;
+  Example: undefined;
+  MainPage: undefined;
 };
 
 export type RootStackNavigation = StackNavigationProp<RootStackParamList>;
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
+const hideHeaderOptions = {
+  title: '',
+  headerBackTitle: '',
+  headerShown: false,
+};
+
+const rootStackScreenMap: {
+  name: keyof RootStackParamList;
+  component: React.ComponentType<any>;
+  options?: any;
+}[] = [
+  {name: 'Welcome', component: WelcomeScreen, options: hideHeaderOptions},
+  {name: 'MainTab', component: MainTabScreen, options: {headerShown: false}},
+  {name: 'Detail', component: DetailScreen, options: hideHeaderOptions},
+  {name: 'Home', component: HomeScreen, options: hideHeaderOptions},
+  {name: 'Example', component: ExampleScreen, options: hideHeaderOptions},
+  {name: 'MainPage', component: MainPageScreen, options: hideHeaderOptions},
+];
+
 function RootStackScreen({navigation}: {navigation: RootStackNavigation}) {
-  const hideHeaderOptions = {
-    title: '',
-    headerBackTitle: '',
-    headerShown: false,
-  };
+  const rootStackScreenMemo: JSX.Element[] = useMemo(() => {
+    let stackScreenArr: JSX.Element[] = [];
+    rootStackScreenMap?.map(item => {
+      stackScreenArr.push(
+        <RootStack.Screen
+          key={`${item.name}`}
+          name={item.name}
+          component={item.component}
+          options={item.options}
+        />,
+      );
+    });
+    return stackScreenArr;
+  }, []);
 
   useEffect(() => {
     // navigation.navigate('Login');
@@ -57,29 +89,12 @@ function RootStackScreen({navigation}: {navigation: RootStackNavigation}) {
 
   return (
     <RootStack.Navigator
-      initialRouteName="Welcome"
+      initialRouteName="MainTab"
       screenOptions={{
         headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <RootStack.Group>
-        <RootStack.Screen name="Welcome" component={WelcomeScreen} />
-        <RootStack.Screen
-          name="MainTab"
-          options={{headerShown: false}}
-          component={MainTabScreen}
-        />
-        <RootStack.Screen
-          name="Detail"
-          options={hideHeaderOptions}
-          component={DetailScreen}
-        />
-        <RootStack.Screen
-          name="Home"
-          options={hideHeaderOptions}
-          component={HomeScreen}
-        />
-      </RootStack.Group>
+      <RootStack.Group>{rootStackScreenMemo}</RootStack.Group>
       <RootStack.Group screenOptions={{presentation: 'modal'}}>
         <RootStack.Screen
           options={{headerShown: false}}

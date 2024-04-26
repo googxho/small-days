@@ -1,5 +1,5 @@
 import React from 'react';
-import type { FormLayout } from './type';
+import type {FormLayout} from './type';
 
 export interface FormContextType {
   layout?: FormLayout;
@@ -7,4 +7,6 @@ export interface FormContextType {
   showValidateMessage?: boolean;
 }
 
-export const FormContext = React.createContext<FormContextType>({} as FormContextType);
+export const FormContext = React.createContext<FormContextType>(
+  {} as FormContextType,
+);
