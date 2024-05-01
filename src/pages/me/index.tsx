@@ -1,64 +1,139 @@
-/*
- * @Auther: xinhong.gong
- * @Date: 2023-11-21 21:46:28
- * @LastEditors: xinhong.gong xinhong.gong@guojutech.net
- * @LastEditTime: 2023-11-23 23:05:59
- * @FilePath: /small-days/src/pages/me/index.tsx
- * @Description:
- */
-import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
-import {CompositeScreenProps, useNavigation} from '@react-navigation/native';
-import {StackScreenProps} from '@react-navigation/stack';
-import {RootStackParamList} from 'src/navigator';
-import {MainTabParamList} from 'src/navigator/MainTab';
-import {observer} from 'mobx-react';
-import {Button, Text, View} from 'react-native';
-import React from 'react';
-import {useRequest} from 'ahooks';
-import {getSecurityCode} from 'src/services/login';
-import {csvToJson} from 'src/utils/csv-to-json';
+import React, {memo, useState} from 'react';
+import {ScrollView, Image, StyleSheet, View} from 'react-native';
+import {Button, Cell} from '@gongxh/rn-vant';
+import {DemoBlock} from '../../component';
+import {Checkbox} from 'src/component/check-box';
+import UncontrolledCheckbox from 'src/component/check-box/Checkbox';
 
-type INavigateProps = CompositeScreenProps<
-  BottomTabScreenProps<MainTabParamList, 'Me'>,
-  StackScreenProps<RootStackParamList>
->;
+const activeIcon = 'https://img.yzcdn.cn/vant/user-active.png';
+const inactiveIcon = 'https://img.yzcdn.cn/vant/user-inactive.png';
 
-const _MeScreen: React.FC = () => {
-  // const store = useStore();
-  // const {userInfo} = store.userStore;
-  const navigation = useNavigation<INavigateProps['navigation']>();
+const CheckboxExample = memo(() => {
+  const [value, setValue] = useState<any[]>([]);
+  const [cellValue, setCellValue] = useState<string[]>([]);
 
-  const {data, run, loading} = useRequest(csvToJson, {
-    manual: true,
-    onBefore: params => {
-      console.log(`Start Request: ${params[0]}`);
-    },
-    onSuccess: (result, params) => {
-      // setState('');
-      console.log(`The username was changed to "${params[0]}" !`);
-    },
-    onError: error => {
-      console.log(error.message);
-    },
-    onFinally: (params, result, error) => {
-      console.log('Request finish');
-    },
-  });
+  const toggle = (check: string) => {
+    const index = cellValue.indexOf(check);
+    const nextCellValue = [...cellValue];
+    if (index === -1) {
+      nextCellValue.push(check);
+    } else {
+      nextCellValue.splice(index, 1);
+    }
+    setCellValue(nextCellValue);
+  };
+  const handleCheckChange = isChecked => {
+    console.log('Checkbox is checked:', isChecked);
+  };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: '45%',
-        alignItems: 'center',
-      }}>
-      <Text style={{fontSize: 20, marginTop: 20}}>
-        {/* {userInfo.nickname}({userInfo.id}) */}me
-      </Text>
-      <Text>{loading ? '请求中...' : '已完成'}</Text>
-      <Button title="请求" onPress={run} />
-    </View>
+    <ScrollView>
+      {/* <DemoBlock title="基础用法" inset>
+        <Checkbox defaultChecked>复选框</Checkbox>
+      </DemoBlock>
+      <DemoBlock title="禁用状态" inset>
+        <Checkbox disabled>复选框</Checkbox>
+        <Checkbox defaultChecked disabled style={styles.checkbox}>
+          复选框
+        </Checkbox>
+      </DemoBlock>
+      <DemoBlock title="自定义形状" inset>
+        <Checkbox defaultChecked shape="square">
+          复选框
+        </Checkbox>
+      </DemoBlock>
+      <DemoBlock title="自定义颜色" inset>
+        <Checkbox checkedColor="#ee0a24">复选框</Checkbox>
+      </DemoBlock>
+      <DemoBlock title="自定义大小" inset>
+        <Checkbox iconSie={24} defaultChecked>
+          复选框
+        </Checkbox>
+      </DemoBlock>
+      <DemoBlock title="自定义图标" inset>
+        <Checkbox
+          icon={({checked}) => (
+            <Image
+              style={styles.imgIcon}
+              source={{uri: checked ? activeIcon : inactiveIcon}}
+            />
+          )}>
+          复选框
+        </Checkbox>
+      </DemoBlock> */}
+      {/* <DemoBlock title="复选框组" inset>
+        <Checkbox.Group>
+          <Checkbox value="a">复选框 a</Checkbox>
+          <Checkbox value="b" style={styles.checkbox}>
+            复选框 b
+          </Checkbox>
+        </Checkbox.Group>
+      </DemoBlock> */}
+      <DemoBlock title="水平排列" inset>
+        <Checkbox.Group direction="horizontal">
+          <Checkbox value="a">复选框 a</Checkbox>
+          <Checkbox value="b" style={styles.checkboxHorizontal}>
+            复选框 b
+          </Checkbox>
+        </Checkbox.Group>
+      </DemoBlock>
+      <DemoBlock title="全选与反选" inset>
+        <Checkbox.Group value={value} onChange={setValue}>
+          <Checkbox value="a">复选框 a</Checkbox>
+          <Checkbox value="b" style={styles.checkbox}>
+            复选框 b
+          </Checkbox>
+          <Checkbox value="c" style={styles.checkbox}>
+            复选框 c
+          </Checkbox>
+        </Checkbox.Group>
+        <View style={{flexDirection: 'row', marginTop: 16}}>
+          <Button type="primary" onPress={() => setValue(['a', 'b', 'c'])}>
+            全选
+          </Button>
+          <Button
+            type="primary"
+            style={{marginLeft: 16}}
+            onPress={() => setValue([])}>
+            反选
+          </Button>
+        </View>
+      </DemoBlock>
+      <DemoBlock title="搭配单元格组件使用" inset>
+        <Cell.Group>
+          <Cell
+            title="复选框a"
+            value={<Checkbox checked={cellValue.includes('a')} />}
+            onPress={() => toggle('a')}
+          />
+          <Cell
+            title="复选框b"
+            value={<Checkbox checked={cellValue.includes('b')} />}
+            onPress={() => toggle('b')}
+          />
+        </Cell.Group>
+      </DemoBlock>
+      <UncontrolledCheckbox
+        label="接受条款"
+        initialCheck={false}
+        onChange={handleCheckChange}
+      />
+    </ScrollView>
   );
-};
+});
 
-export const MeScreen = observer(_MeScreen);
+const styles = StyleSheet.create({
+  checkbox: {
+    marginTop: 8,
+  },
+  checkboxHorizontal: {
+    marginLeft: 20,
+  },
+  imgIcon: {
+    height: 20,
+    width: 25,
+  },
+});
+
+// export default CheckboxExample;
+export const MeScreen = CheckboxExample;

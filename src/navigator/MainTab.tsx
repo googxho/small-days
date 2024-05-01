@@ -18,7 +18,6 @@ import {RouteProp} from '@react-navigation/native';
 import {RootStackNavigation, RootStackParamList} from '.';
 import {MeScreen} from '@pages/me';
 import IconFont from 'src/iconfont';
-import {MainPageScreen} from '@pages/main-page';
 
 export type MainTabParamList = {
   Home: undefined;
@@ -44,9 +43,9 @@ const RootStack: React.FC<MainTabProps> = () => {
         tabBarActiveTintColor: '#0025ff',
       }}>
       <Tab.Screen
-        name="MainPage"
+        name="Home"
         options={{
-          title: '首页',
+          title: '消息',
           tabBarIcon: ({focused, color}: {focused: boolean; color: string}) => {
             return focused ? (
               <IconFont name="shouye" color={color} />
@@ -55,7 +54,7 @@ const RootStack: React.FC<MainTabProps> = () => {
             );
           },
         }}
-        component={MainPageScreen}
+        component={MeScreen}
       />
       <Tab.Screen
         name="Contact"
