@@ -14,7 +14,6 @@ import {RootStackParamList} from 'src/navigator';
 import {MainTabParamList} from 'src/navigator/MainTab';
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {Button, Switch} from '@gongxh/rn-vant';
 
 type INavigateProps = CompositeScreenProps<
   BottomTabScreenProps<MainTabParamList, 'Me'>,
@@ -29,8 +28,8 @@ const WelcomeScreen: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Me');
-    }, 1000);
+      navigation.navigate('Login');
+    }, 3000);
   });
   return (
     <View
@@ -39,12 +38,12 @@ const WelcomeScreen: React.FC = () => {
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Switch defaultChecked />
+      {/* <Switch defaultChecked />
       <Button type="primary">主要按钮</Button>
       <Button type="success">成功按钮</Button>
       <Button type="default">默认按钮</Button>
       <Button type="warning">警告按钮</Button>
-      <Button type="danger">危险按钮</Button>
+      <Button type="danger">危险按钮</Button> */}
       <Text style={{fontSize: 40}}>Sweet Life</Text>
       <Text style={{fontSize: 20, marginTop: 20}}>小日子</Text>
       <View style={styles.bottom} />
