@@ -56,7 +56,12 @@ const _MeScreen: React.FC = () => {
         {/* {userInfo.nickname}({userInfo.id}) */}me
       </Text>
       <Text>{loading ? '请求中...' : '已完成'}</Text>
-      <Button title="请求" onPress={run} />
+      <Button
+        title="请求"
+        onPress={() => {
+          navigation.navigate('Login');
+        }}
+      />
     </View>
   );
 };
