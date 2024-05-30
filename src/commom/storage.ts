@@ -6,8 +6,67 @@
  * @FilePath: /small-days/src/commom/this.storage.ts
  * @Description:
  */
+import {configurePersistable} from 'mobx-persist-store';
 import {MMKV} from 'react-native-mmkv';
 import {initializeMMKVFlipper} from 'react-native-mmkv-flipper-plugin';
+
+const storage = new MMKV();
+
+export const initStores = () => {
+  configurePersistable({
+    // storage: new Storage(storage) as any,
+    storage: {
+      setItem: (key: string, data: any) => storage.set(key, data),
+      getItem: (key: string) => storage.getString(key) || null,
+      removeItem: (key: string) => storage.delete(key),
+      ...(new Storage(storage) as any),
+    },
+    expireIn: 1000 * 3600 * 24 * 10, // 10天到期，默认无限期
+    removeOnExpiration: true, // 到期后删除
+    stringify: true,
+  });
+};
+
+export async function setStorage(key: string, value: any) {
+  try {
+    storage.set(key, JSON.stringify(value, null, ''));
+  } catch (e: any) {
+    // errorLog(`存储失败${key}`, e?.message);
+  }
+}
+
+export async function getStorage(key: string) {
+  try {
+    const result = storage.getString(key);
+    if (result) {
+      return JSON.parse(result);
+    }
+  } catch {}
+  return null;
+}
+
+export async function getMultiStorage(keys: string[]) {
+  if (keys.length === 0) {
+    return [];
+  }
+  // const result = await storage.multiGet(keys);
+  const result = storage.getAllKeys();
+
+  return result.map(_ => {
+    try {
+      if (_[1]) {
+        return JSON.parse(_[1]);
+      }
+      return null;
+    } catch {
+      return null;
+    }
+  });
+}
+
+export async function removeStorage(key: string) {
+  return storage.delete(key);
+}
 
 class Storage {
   storage: any = null;

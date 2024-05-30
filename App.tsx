@@ -9,21 +9,28 @@
 
 import React from 'react';
 import {useColorScheme} from 'react-native';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Navigator from 'src/navigator';
-import {useNavigationContainerRef} from '@react-navigation/native';
+import {RootStackScreen} from 'src/navigator';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import {useFlipper} from '@react-navigation/devtools';
 import {StoreContext, rootStore} from '@stores/index';
+import Theme from '../small-days/src/commom/theme';
+import RootStack from '../small-days/src/navigator/MainTab';
 
 function App(): JSX.Element {
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
+  const theme = Theme.useTheme();
 
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
     <StoreContext.Provider value={rootStore}>
-      <Navigator />
+      <NavigationContainer theme={theme} ref={navigationRef}>
+        <RootStackScreen navigation={RootStack} />
+      </NavigationContainer>
     </StoreContext.Provider>
   );
 }

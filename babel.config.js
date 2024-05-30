@@ -19,21 +19,13 @@ module.exports = {
       'module-resolver',
       {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
-        root: ['.'],
+        root: ['./'],
         alias: {
-          '@assets': './src/assets',
-          '@common': './src/common',
-          '@components': './src/components',
-          '@config': './src/config',
-          '@pages': './src/pages',
-          '@api': './src/api',
-          '@stores': './src/stores',
-          '@types': './src/types',
-          '@styles': './src/common/styles/index',
+          '^@/(.+)': './src/\\1',
         },
       },
     ],
-    ['@babel/plugin-proposal-decorators', {legacy: true}],
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
     [
       'react-native-reanimated/plugin',
       {

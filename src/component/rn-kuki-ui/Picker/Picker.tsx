@@ -1,15 +1,21 @@
-import React, { useContext, useEffect, forwardRef, useCallback, useRef } from 'react';
-import { View, Text } from 'react-native';
+import React, {
+  useContext,
+  useEffect,
+  forwardRef,
+  useCallback,
+  useRef,
+} from 'react';
+import {View, Text} from 'react-native';
 import isEqual from 'lodash-es/isEqual';
 import LinearGradient from '../LinearGradient';
 import WheelPicker from './WheelPicker';
 import TouchableOpacity from '../TouchableOpacity';
-import { useThemeFactory } from '../Theme';
+import {useThemeFactory} from '../Theme';
 import ConfigProviderContext from '../ConfigProvider/ConfigProviderContext';
-import { useSetState } from '../hooks';
-import { createStyle } from './style';
-import type { PickerProps, PickerFieldNames, State } from './type';
-import { isPlain, flateColumns, DataType, getDateType } from './utils';
+import {useSetState} from '../hooks';
+import {createStyle} from './style';
+import type {PickerProps, PickerFieldNames, State} from './type';
+import {isPlain, flateColumns, DataType, getDateType} from './utils';
 
 const DEFAULT_PICKER_FIELD_NAMES: Required<PickerFieldNames> = {
   text: 'text',
@@ -31,8 +37,8 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
     children: childrenKey,
   } = Object.assign(DEFAULT_PICKER_FIELD_NAMES, props.columnsFieldNames);
 
-  const { styles, theme } = useThemeFactory(createStyle);
-  const { locale } = useContext(ConfigProviderContext);
+  const {styles, theme} = useThemeFactory(createStyle);
+  const {locale} = useContext(ConfigProviderContext);
   const dateType = useRef(DataType.SINGLE);
   const [state, updateState, stateRef] = useSetState<State>({
     values: [],
@@ -42,7 +48,7 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
   });
 
   useEffect(() => {
-    const { columns, value = [] } = props;
+    const {columns, value = []} = props;
     dateType.current = getDateType(columns, childrenKey);
     const lastColumns = isPlain(columns) ? [columns] : columns;
     const lastValue = Array.isArray(value) ? value : [value];
@@ -56,8 +62,10 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
 
   const handleChange = useCallback(
     (index: number, columnIndex: number) => {
-      const lastColumns = isPlain(props.columns) ? [props.columns] : props.columns;
-      const { values, columns } = stateRef.current;
+      const lastColumns = isPlain(props.columns)
+        ? [props.columns]
+        : props.columns;
+      const {values, columns} = stateRef.current;
       const targetValue = columns[columnIndex][index][valueKey];
 
       if (dateType.current === DataType.CASCADE) {
@@ -68,40 +76,34 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
 
       const newState = flateColumns(lastColumns, values, valueKey, childrenKey);
       if (dateType.current === DataType.SINGLE) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         props.onChange?.(newState.values[0], newState.options[0], index);
       } else {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         props.onChange?.(newState.values, newState.options, index);
       }
       updateState(newState);
     },
-    [props.columns, valueKey, childrenKey, props.onChange]
+    [props.columns, valueKey, childrenKey, props.onChange],
   );
 
   const handleConfirm = useCallback(() => {
-    const { values, options } = stateRef.current;
+    const {values, options} = stateRef.current;
     if (dateType.current === DataType.SINGLE) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       props.onConfirm?.(values[0], options[0]);
     } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       props.onConfirm?.(values, options);
     }
   }, [props.onConfirm]);
 
   const handleCacel = useCallback(() => {
-    const { values, options } = stateRef.current;
+    const {values, options} = stateRef.current;
     if (dateType.current === DataType.SINGLE) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       props.onCancel?.(values[0], options[0]);
     } else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       props.onCancel?.(values, options);
     }
@@ -116,8 +118,7 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
               <TouchableOpacity
                 style={styles.button}
                 activeOpacity={theme.active_opacity}
-                onPress={handleCacel}
-              >
+                onPress={handleCacel}>
                 <Text style={[styles.buttonText, styles.cancelButton]}>
                   {props.cancelButtonText || locale.cancel}
                 </Text>
@@ -126,8 +127,7 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
               <TouchableOpacity
                 style={styles.button}
                 activeOpacity={theme.active_opacity}
-                onPress={handleConfirm}
-              >
+                onPress={handleConfirm}>
                 <Text style={[styles.buttonText, styles.confirmButton]}>
                   {props.confirmButtonText || locale.confirm}
                 </Text>
@@ -146,10 +146,9 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
     const maskHeight = (wrapHeight - itemHeight) / 2;
 
     return (
-      <View style={[styles.columns, { height: wrapHeight }]}>
+      <View style={[styles.columns, {height: wrapHeight}]}>
         {state.columns.map((item, index) => (
           <WheelPicker
-            // eslint-disable-next-line react/no-array-index-key
             key={`picker-${index}`}
             index={state.indexs[index]}
             options={item}
@@ -161,12 +160,12 @@ const Picker = forwardRef<View, PickerProps>((props, ref) => {
         ))}
         <LinearGradient
           colors={theme.picker_mask_top_color}
-          style={[styles.maskTop, { height: maskHeight }]}
+          style={[styles.maskTop, {height: maskHeight}]}
           pointerEvents="none"
         />
         <LinearGradient
           colors={theme.picker_mask_bottom_color}
-          style={[styles.maskBottom, { height: maskHeight }]}
+          style={[styles.maskBottom, {height: maskHeight}]}
           pointerEvents="none"
         />
       </View>

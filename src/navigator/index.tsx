@@ -25,6 +25,8 @@ import WelcomeScreen from '@pages/welcome';
 import HomeScreen from '@pages/home';
 import ExampleScreen from '@pages/example-kuki-ui';
 import {MainPageScreen} from '@pages/main-page';
+import Theme from 'src/commom/theme';
+import {navigationRef, useNavigate} from './router';
 
 export type RootStackParamList = {
   MainTab: NavigatorScreenParams<MainTabParamList>;
@@ -67,7 +69,9 @@ const rootStackScreenMap: {
   {name: 'MainPage', component: MainPageScreen, options: hideHeaderOptions},
 ];
 
-function RootStackScreen({navigation}: {navigation: RootStackNavigation}) {
+export const RootStackScreen: React.FC<{
+  navigation: RootStackNavigation | any;
+}> = () => {
   const rootStackScreenMemo: JSX.Element[] = useMemo(() => {
     let stackScreenArr: JSX.Element[] = [];
     rootStackScreenMap?.map(item => {
@@ -83,13 +87,15 @@ function RootStackScreen({navigation}: {navigation: RootStackNavigation}) {
     return stackScreenArr;
   }, []);
 
+  const nav = useNavigate();
+
   useEffect(() => {
-    // navigation.navigate('Login');
+    nav('Login');
   });
 
   return (
     <RootStack.Navigator
-      initialRouteName="MainTab"
+      initialRouteName="Welcome"
       screenOptions={{
         headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
@@ -104,11 +110,12 @@ function RootStackScreen({navigation}: {navigation: RootStackNavigation}) {
       </RootStack.Group>
     </RootStack.Navigator>
   );
-}
+};
 
 function Navigator() {
+  const theme = Theme.useTheme();
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme} ref={navigationRef}>
       <RootStackScreen navigation={RootStack} />
     </NavigationContainer>
   );
