@@ -14,7 +14,7 @@ import {MainTabParamList} from 'src/navigator/MainTab';
 import {observer} from 'mobx-react';
 import {FlatList, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useContext} from 'react';
-import {useStore} from '@stores/index';
+import {useStore} from '@/stores/index';
 import {ThemeContext} from 'src/component/ThemeContext';
 import {FlashList} from '@shopify/flash-list';
 import acidList from 'src/assets/7791387030.json';

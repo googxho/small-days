@@ -16,9 +16,9 @@ import {MainTabBar} from './MainTabBar';
 // import {ContactScreen} from '@/pages/contact';
 import {RouteProp} from '@react-navigation/native';
 import {RootStackNavigation, RootStackParamList} from '.';
-import {MeScreen} from '@pages/me';
+import {MeScreen} from '@/pages/me';
 import IconFont from 'src/iconfont';
-import {MainPageScreen} from '@pages/main-page';
+import {MainPageScreen} from '@/pages/main-page';
 
 export type MainTabParamList = {
   Home: undefined;

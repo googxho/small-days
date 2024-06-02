@@ -3,19 +3,14 @@
   "include": ["*.ts", "*.d.ts", "*.tsx", "src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "App.tsx", "src/common/index.ts", "App.jsx", "index.js", "src/components/modal/tip.bak.js",],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "jsx": "react",
-    "allowJs": true,
+    /* Visit https://aka.ms/tsconfig.json to read more about this file */
+
+    /* Completeness */
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "baseUrl": ".",
     "paths": {
-      "@assets/*": ["src/assets/*"],
-      "@common/*": ["src/common/*"],
-      "@components/*": ["src/components/*"],
-      "@config/*": ["src/config/*"],
-      "@pages/*": ["src/pages/*"],
-      "@api/*": ["src/api/*"],
-      "@stores/*": ["src/stores/*"],
-      "@types/*": ["src/types/*"],
-      "@styles/*": ["src/common/styles/*"],
-    }
-  },
+      "@/*": ["./src/*"]
+    },
+    "types": ["node"]
+  }
 }

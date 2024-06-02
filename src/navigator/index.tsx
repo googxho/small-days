@@ -19,12 +19,12 @@ import {
 } from '@react-navigation/native';
 
 import MainTabScreen, {MainTabParamList} from './MainTab';
-import DetailScreen from '@pages/detail';
-import LoginScreen from '@pages/login';
-import WelcomeScreen from '@pages/welcome';
-import HomeScreen from '@pages/home';
-import ExampleScreen from '@pages/example-kuki-ui';
-import {MainPageScreen} from '@pages/main-page';
+import DetailScreen from '@/pages/detail';
+import LoginScreen from '@/pages/login';
+import WelcomeScreen from '@/pages/welcome';
+import HomeScreen from '@/pages/home';
+import ExampleScreen from '@/pages/example-kuki-ui';
+import {MainPageScreen} from '@/pages/main-page';
 import Theme from 'src/commom/theme';
 import {navigationRef, useNavigate} from './router';
 

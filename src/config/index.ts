@@ -8,6 +8,6 @@
  */
 // export const baseURL = 'http://wow-im.airtlab.com';
 
-export const baseURL = 'http://192.168.0.103:8888';
+export const baseURL = 'http://192.168.199.133:8888';
 
 export const appVersion = '1.0.0';
