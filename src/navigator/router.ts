@@ -3,6 +3,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {createRef, useCallback} from 'react';
 import Home from '@/pages/home';
 import ArtistDetail from '@/pages/artistDetail';
+import {KukiUIRouter} from '.';
 // import Downloading from '@/pages/downloading';
 // import FileSelector from '@/pages/fileSelector';
 // import LocalMusic from '@/pages/localMusic';
@@ -65,6 +66,7 @@ export const ROUTE_PATH = {
   SET_CUSTOM_THEME: 'set-custom-theme',
   /** 权限管理 */
   PERMISSIONS: 'permissions',
+  /** kuki-ui demo路由 */
 } as const;
 
 type Valueof<T> = T[keyof T];
