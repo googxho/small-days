@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native';
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 
 interface InputStyles {
   body: ViewStyle;
@@ -7,7 +7,9 @@ interface InputStyles {
   errorControl: ViewStyle;
 }
 
-export const createInputStyle = (theme: DiceUI.Theme): StyleSheet.NamedStyles<InputStyles> => {
+export const createInputStyle = (
+  theme: DiceUI.Theme,
+): StyleSheet.NamedStyles<InputStyles> => {
   return StyleSheet.create<InputStyles>({
     body: {
       alignItems: 'center',
@@ -19,6 +21,7 @@ export const createInputStyle = (theme: DiceUI.Theme): StyleSheet.NamedStyles<In
       flex: 1,
       fontSize: theme.cell_font_size,
       paddingTop: 3,
+      padding: 0,
       textAlignVertical: 'top',
     },
     disabledControl: {
@@ -36,7 +39,7 @@ interface TextAreaStyles {
 }
 
 export const createTextAreaStyle = (
-  theme: DiceUI.Theme
+  theme: DiceUI.Theme,
 ): StyleSheet.NamedStyles<TextAreaStyles> => {
   return StyleSheet.create<TextAreaStyles>({
     container: {

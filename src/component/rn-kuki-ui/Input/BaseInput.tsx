@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState, useMemo } from 'react';
+import React, {forwardRef, useRef, useState, useMemo} from 'react';
 import {
   KeyboardTypeOptions,
   TextInput,
@@ -8,15 +8,15 @@ import {
   StyleSheet,
   TextStyle,
 } from 'react-native';
-import { Clear } from '../../rn-kuki-icons';
+import {Clear} from '../../rn-kuki-icons';
 import toString from 'lodash-es/toString';
 import isFunction from 'lodash-es/isFunction';
 import isObject from 'lodash-es/isObject';
-import { useControllableValue, useMemoizedFn } from '../hooks';
-import { formatNumber } from '../utils/number';
-import { cloneReactNode } from '../utils/cloneReactNode';
-import { useThemeFactory } from '../Theme';
-import { createInputStyle } from './style';
+import {useControllableValue, useMemoizedFn} from '../hooks';
+import {formatNumber} from '../utils/number';
+import {cloneReactNode} from '../utils/cloneReactNode';
+import {useThemeFactory} from '../Theme';
+import {createInputStyle} from './style';
 import type {
   InputProps,
   TextAreaProps,
@@ -40,7 +40,7 @@ const BaseInput = forwardRef<InputInstance, BaseInputProps>((props, ref) => {
     rows = 1,
     autoSize,
   } = props;
-  const { styles, theme } = useThemeFactory(createInputStyle);
+  const {styles, theme} = useThemeFactory(createInputStyle);
   const [value, setValue] = useControllableValue<string | number>(props);
   const [inputFocus, setInputFocus] = useState(false);
   // 单行的高度
@@ -60,19 +60,22 @@ const BaseInput = forwardRef<InputInstance, BaseInputProps>((props, ref) => {
   const showClear = useMemo(() => {
     if (props.clearable && !props?.readOnly) {
       const hasValue = value !== '' && value !== undefined;
-      const trigger = clearTrigger === 'always' || (clearTrigger === 'focus' && inputFocus);
+      const trigger =
+        clearTrigger === 'always' || (clearTrigger === 'focus' && inputFocus);
       return hasValue && trigger;
     }
     return false;
   }, [value, clearTrigger, inputFocus]);
 
-  const formatValue = useMemoizedFn((inputValue: string | number, trigger = 'onChange') => {
-    if (isFunction(formatter) && trigger === formatTrigger) {
-      return formatter(inputValue);
-    }
+  const formatValue = useMemoizedFn(
+    (inputValue: string | number, trigger = 'onChange') => {
+      if (isFunction(formatter) && trigger === formatTrigger) {
+        return formatter(inputValue);
+      }
 
-    return inputValue;
-  });
+      return inputValue;
+    },
+  );
 
   const handleFocus = useMemoizedFn((e: InputFousEvent) => {
     setInputFocus(true);
@@ -89,50 +92,68 @@ const BaseInput = forwardRef<InputInstance, BaseInputProps>((props, ref) => {
     props.onKeyPress?.(e);
   });
 
-  const handleChange = useMemoizedFn((text: string, trigger?: InputFormatTrigger) => {
-    contentChanged.current = true;
-    let finalValue: string | number = text;
-    if (type === 'number' || type === 'digit') {
-      const isNumber = type === 'number';
-      finalValue = formatNumber(finalValue, isNumber, isNumber);
-    }
-    finalValue = formatValue(finalValue, trigger);
-    setValue(finalValue);
-  });
+  const handleChange = useMemoizedFn(
+    (text: string, trigger?: InputFormatTrigger) => {
+      contentChanged.current = true;
+      let finalValue: string | number = text;
+      if (type === 'number' || type === 'digit') {
+        const isNumber = type === 'number';
+        finalValue = formatNumber(finalValue, isNumber, isNumber);
+      }
+      finalValue = formatValue(finalValue, trigger);
+      setValue(finalValue);
+    },
+  );
 
-  const onChange = useMemoizedFn(({ nativeEvent }: InputChangeEvent) => {
+  const onChange = useMemoizedFn(({nativeEvent}: InputChangeEvent) => {
     handleChange(nativeEvent.text, 'onChange');
   });
 
-  const handleContentSizeChange = useMemoizedFn((event: ContentSizeChangeEvent) => {
-    if (!contentChanged.current) return;
-    let _height: number;
-    if (autoSize) {
-      const { minHeight = singleRowHeight, maxHeight = event.nativeEvent.contentSize.height } =
-        isObject(autoSize) ? autoSize : {};
-      _height = Math.max(minHeight, maxHeight);
-    } else if (rows > 1) {
-      _height = rows * singleRowHeight;
-    } else {
-      _height = singleRowHeight;
-    }
-    setInputHeight(_height);
-  });
+  const handleContentSizeChange = useMemoizedFn(
+    (event: ContentSizeChangeEvent) => {
+      if (!contentChanged.current) {
+        return;
+      }
+      let _height: number;
+      if (autoSize) {
+        const {
+          minHeight = singleRowHeight,
+          maxHeight = event.nativeEvent.contentSize.height,
+        } = isObject(autoSize) ? autoSize : {};
+        _height = Math.max(minHeight, maxHeight);
+      } else if (rows > 1) {
+        _height = rows * singleRowHeight;
+      } else {
+        _height = singleRowHeight;
+      }
+      setInputHeight(_height);
+    },
+  );
 
   const getHeight = useMemoizedFn(() => {
-    if (inputHeight) return inputHeight;
+    if (inputHeight) {
+      return inputHeight;
+    }
     return rows * singleRowHeight;
   });
 
   const getTextContentType = (): TextInputIOSProps['textContentType'] => {
-    if (type === 'tel') return 'telephoneNumber';
-    if (type === 'password') return 'password';
+    if (type === 'tel') {
+      return 'telephoneNumber';
+    }
+    if (type === 'password') {
+      return 'password';
+    }
     return undefined;
   };
 
   const getKeyboardType = (): KeyboardTypeOptions | undefined => {
-    if (type === 'digit' || type === 'number') return 'numeric';
-    if (type === 'tel') return 'phone-pad';
+    if (type === 'digit' || type === 'number') {
+      return 'numeric';
+    }
+    if (type === 'tel') {
+      return 'phone-pad';
+    }
     return undefined;
   };
 
@@ -164,7 +185,7 @@ const BaseInput = forwardRef<InputInstance, BaseInputProps>((props, ref) => {
         textAlign={props.align}
         textContentType={getTextContentType()}
         keyboardType={getKeyboardType()}
-        style={[inputStyles, { height: getHeight() }]}
+        style={[inputStyles, {height: getHeight()}]}
         onBlur={handleBulr}
         onFocus={handleFocus}
         onKeyPress={handleKeyPress}
@@ -179,8 +200,7 @@ const BaseInput = forwardRef<InputInstance, BaseInputProps>((props, ref) => {
       return (
         <Pressable
           onPress={() => inputRef.current?.clear()}
-          style={{ marginLeft: theme.padding_xs }}
-        >
+          style={{marginLeft: theme.padding_xs}}>
           {cloneReactNode(clearIcon, {
             size: theme.field_clear_icon_size,
             color: theme.field_clear_icon_color,
