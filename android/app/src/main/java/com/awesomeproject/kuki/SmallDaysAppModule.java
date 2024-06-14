@@ -1,11 +1,14 @@
 package com.awesomeproject.kuki;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
+import android.util.Log;
+import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.awesomeproject.utils.DeviceUtil;
 import com.facebook.react.BuildConfig;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -60,5 +63,19 @@ public class SmallDaysAppModule extends ReactContextBaseJavaModule {
         } else {
         promise.resolve(String.valueOf(versionName));
         }
+    }
+    /**
+     * 播放声音
+     *
+     * @param msg
+     */
+    @ReactMethod
+    public void playText(String msg) {
+        Log.i(TAG, "playText: " + msg);
+        if (TextUtils.isEmpty(msg)) {
+            return;
+        }
+//        KeyboardPlayUtil KeyboardPlayUtil;
+//        KeyboardPlayUtil.keyboardPlay(msg);
     }
 }

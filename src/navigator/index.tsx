@@ -75,6 +75,7 @@ import KGrid from '@/pages/example-kuki-ui/pages/grid';
 import KIndexBar from '@/pages/example-kuki-ui/pages/index-bar';
 import KNavBar from '@/pages/example-kuki-ui/pages/navbar';
 import KTabs from '@/pages/example-kuki-ui/pages/tab';
+import KNumberInputKeyBoard from '@/pages/example-kuki-ui/pages/number-input-keyboard';
 
 export type RootStackParamList = {
   MainTab: NavigatorScreenParams<MainTabParamList>;
@@ -164,6 +165,11 @@ export const KukiUIRouter: any = [
   {name: 'KIndexBar', component: KIndexBar, options: hideHeaderOptions},
   {name: 'KNavBar', component: KNavBar, options: hideHeaderOptions},
   {name: 'KTabs', component: KTabs, options: hideHeaderOptions},
+  {
+    name: 'KNumberInputKeyBoard',
+    component: KNumberInputKeyBoard,
+    options: hideHeaderOptions,
+  },
 ];
 
 const rootStackScreenMap: {

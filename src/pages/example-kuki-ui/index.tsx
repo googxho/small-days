@@ -426,6 +426,18 @@ const ExampleScreen: React.FC = () => {
           </Button>
         </View>
       </Cell.Group>
+      <Cell.Group title="自定义键盘输入框组件">
+        <View style={{}}>
+          <Button
+            onPress={() => {
+              navigate('KNumberInputKeyBoard');
+            }}
+            plain
+            type="success">
+            自定义键盘输入框
+          </Button>
+        </View>
+      </Cell.Group>
     </ScrollView>
   );
 };
