@@ -22,8 +22,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import InputManger from './input-manger';
-import IconFont from '@/component/rn-kuki-icons';
-import {IconNames} from '@/iconfont';
+import IconFont, {IconNames} from '@/iconfont';
 
 const colorFCFCFC = '#FCFCFC';
 const colorDEDEDE = '#DEDEDE';
@@ -108,7 +107,7 @@ const KeyItem: React.FC<{
             style={[
               !canClick && {opacity: 0.5},
               {
-                fontSize: 36,
+                fontSize: 20,
                 color: '#000000',
                 textAlign: 'center',
                 fontWeight: 'bold',

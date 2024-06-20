@@ -359,7 +359,7 @@ export default class NumberInput extends Component<
                 style={[
                   {
                     color: isFocus || showValue ? Text6 : Text2,
-                    fontSize: 48,
+                    fontSize: 30,
                     fontWeight: 'bold',
                     flex: 1,
                     textAlign: 'right',
@@ -382,8 +382,8 @@ export default class NumberInput extends Component<
                         inputRange: [0, 1],
                         outputRange: ['#F4F4F4', Primary4],
                       }),
-                      height: 40,
-                      width: 4,
+                      height: 30,
+                      width: 2,
                     },
                     cursorStyle,
                   ]}
@@ -405,8 +405,8 @@ const styles = StyleSheet.create({
   innerContainer: {
     justifyContent: 'center',
     borderWidth: 4,
-    paddingHorizontal: 24,
-    paddingVertical: 16,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
     borderRadius: 8,
     flexShrink: 1,
     borderColor: Border3,
