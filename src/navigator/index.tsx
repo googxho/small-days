@@ -76,6 +76,7 @@ import KIndexBar from '@/pages/example-kuki-ui/pages/index-bar';
 import KNavBar from '@/pages/example-kuki-ui/pages/navbar';
 import KTabs from '@/pages/example-kuki-ui/pages/tab';
 import KNumberInputKeyBoard from '@/pages/example-kuki-ui/pages/number-input-keyboard';
+import KnestedScroll from '@/pages/example-kuki-ui/pages/nested-scroll';
 
 export type RootStackParamList = {
   MainTab: NavigatorScreenParams<MainTabParamList>;
@@ -170,6 +171,7 @@ export const KukiUIRouter: any = [
     component: KNumberInputKeyBoard,
     options: hideHeaderOptions,
   },
+  {name: 'KnestedScroll', component: KnestedScroll, options: hideHeaderOptions},
 ];
 
 const rootStackScreenMap: {

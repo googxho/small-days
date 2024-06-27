@@ -44,6 +44,12 @@ const ExampleScreen: React.FC = () => {
         <View style={{}}>
           <Button
             onPress={() => {
+              navigate('KnestedScroll');
+            }}>
+            嵌套滚动
+          </Button>
+          <Button
+            onPress={() => {
               navigate('KButton');
             }}>
             Button 按钮
