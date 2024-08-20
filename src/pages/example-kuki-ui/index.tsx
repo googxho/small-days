@@ -50,6 +50,12 @@ const ExampleScreen: React.FC = () => {
           </Button>
           <Button
             onPress={() => {
+              navigate('KlateralScroll');
+            }}>
+            横向滚动
+          </Button>
+          <Button
+            onPress={() => {
               navigate('KButton');
             }}>
             Button 按钮
