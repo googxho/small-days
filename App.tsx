@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import {useColorScheme} from 'react-native';
+import {LogBox, useColorScheme} from 'react-native';
 import {RootStackScreen} from 'src/navigator';
 import {
   NavigationContainer,
@@ -18,6 +18,8 @@ import {useFlipper} from '@react-navigation/devtools';
 import {StoreContext, rootStore} from '@/stores/index';
 import Theme from './src/commom/theme';
 import RootStack from './src/navigator/MainTab';
+// 忽略警告日志
+LogBox.ignoreLogs(['new NativeEventEmitter', 'MobX']); // Ignore log notification by message
 
 function App(): JSX.Element {
   const navigationRef = useNavigationContainerRef();

@@ -116,6 +116,12 @@ const LoginScreen: React.FC = () => {
         }}
       />
       <Button
+        title="跳转MainTab组件"
+        onPress={() => {
+          navigation.navigate('MainTab');
+        }}
+      />
+      <Button
         title="跳转kuki-ui组件"
         onPress={() => {
           navigation.navigate('Example');

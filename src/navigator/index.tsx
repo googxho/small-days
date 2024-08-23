@@ -78,6 +78,8 @@ import KTabs from '@/pages/example-kuki-ui/pages/tab';
 import KNumberInputKeyBoard from '@/pages/example-kuki-ui/pages/number-input-keyboard';
 import KnestedScroll from '@/pages/example-kuki-ui/pages/nested-scroll/index';
 import KlateralScroll from '@/pages/example-kuki-ui/pages/lateral-scroll';
+import PrintTableScreen from '@/pages/table';
+import {SimplePrint} from '@/pages/table/SimplePrint';
 
 export type RootStackParamList = {
   MainTab: NavigatorScreenParams<MainTabParamList>;
@@ -191,6 +193,8 @@ const rootStackScreenMap: {
   {name: 'Home', component: HomeScreen, options: hideHeaderOptions},
   {name: 'Example', component: ExampleScreen, options: hideHeaderOptions},
   {name: 'MainPage', component: MainPageScreen, options: hideHeaderOptions},
+  {name: 'PrintTable', component: PrintTableScreen, options: hideHeaderOptions},
+  {name: 'SimplePrint', component: SimplePrint, options: hideHeaderOptions},
   ...KukiUIRouter,
 ];
 

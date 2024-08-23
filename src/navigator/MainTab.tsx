@@ -19,6 +19,7 @@ import {RootStackNavigation, RootStackParamList} from '.';
 import {MeScreen} from '@/pages/me';
 import IconFont from 'src/iconfont';
 import {MainPageScreen} from '@/pages/main-page';
+import PrintTableScreen from '@/pages/table';
 
 export type MainTabParamList = {
   Home: undefined;
@@ -49,7 +50,7 @@ const RootStack: React.FC<MainTabProps> = () => {
           title: '首页',
           tabBarIcon: ({focused, color}: {focused: boolean; color: string}) => {
             return focused ? (
-              <IconFont name="shouye" color={color} />
+              <IconFont name="a-appround15" color={color} />
             ) : (
               <IconFont name="shouye" color={color} />
             );
@@ -58,24 +59,18 @@ const RootStack: React.FC<MainTabProps> = () => {
         component={MainPageScreen}
       />
       <Tab.Screen
-        name="Contact"
+        name="PrintTable"
         options={{
           title: '朋友',
           tabBarIcon: ({focused, color}: {focused: boolean; color: string}) => {
             return focused ? (
-              <IconFont
-                name="yuangongjiangliwodejianglijiangpinwodelipin"
-                color={color}
-              />
+              <IconFont name="a-appround16" />
             ) : (
-              <IconFont
-                name="yuangongjiangliwodejianglijiangpinwodelipin"
-                color={color}
-              />
+              <IconFont name="a-appround16" color={'#bfbfbf'} />
             );
           },
         }}
-        component={MeScreen}
+        component={PrintTableScreen}
       />
       <Tab.Screen
         name="Me"
@@ -83,7 +78,7 @@ const RootStack: React.FC<MainTabProps> = () => {
           title: '我的',
           tabBarIcon: ({focused, color}: {focused: boolean; color: string}) => {
             return focused ? (
-              <IconFont name="wode" color={color} />
+              <IconFont name="a-appround23" />
             ) : (
               <IconFont name="wode" color={color} />
             );

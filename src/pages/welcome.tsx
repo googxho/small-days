@@ -15,7 +15,7 @@ import {MainTabParamList} from 'src/navigator/MainTab';
 import {StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 
-type INavigateProps = CompositeScreenProps<
+export type INavigateProps = CompositeScreenProps<
   BottomTabScreenProps<MainTabParamList, 'Me'>,
   StackScreenProps<RootStackParamList>
 >;
@@ -28,7 +28,7 @@ const WelcomeScreen: React.FC = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate('Login');
+      navigation.navigate('PrintTable');
     }, 3000);
   });
   return (
