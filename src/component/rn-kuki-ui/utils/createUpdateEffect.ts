@@ -1,5 +1,5 @@
-import { useRef } from 'react';
-import type { useEffect, useLayoutEffect } from 'react';
+import {useRef} from 'react';
+import type {useEffect, useLayoutEffect} from 'react';
 
 type effectHookType = typeof useEffect | typeof useLayoutEffect;
 
@@ -14,7 +14,6 @@ export const createUpdateEffect: (hook: effectHookType) => effectHookType =
       };
     }, []);
 
-    // eslint-disable-next-line consistent-return
     hook(() => {
       if (!isMounted.current) {
         isMounted.current = true;

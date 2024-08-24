@@ -1,12 +1,23 @@
 import React, {memo} from 'react';
-import {StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {Button} from '@/component/rn-kuki-ui';
 import {Plus} from '@/component/rn-kuki-icons';
 import {DemoBlock} from '../../DemoBlock';
 
 const ButtonExample = memo(() => {
+  const styles = StyleSheet.create({
+    button: {
+      marginBottom: 16,
+      marginLeft: 16,
+    },
+    card: {
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+    },
+  });
   return (
-    <>
+    <ScrollView>
       <DemoBlock title="按钮类型" contentStyle={styles.card}>
         <Button type="primary" style={styles.button}>
           主要按钮
@@ -91,20 +102,8 @@ const ButtonExample = memo(() => {
           单色按钮
         </Button>
       </DemoBlock>
-    </>
+    </ScrollView>
   );
-});
-
-const styles = StyleSheet.create({
-  button: {
-    marginBottom: 16,
-    marginLeft: 16,
-  },
-  card: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
 });
 
 export default ButtonExample;

@@ -1,5 +1,5 @@
 import Button from './Button';
 
 export default Button;
-export { Button };
-export type { ButtonProps, ButtonSize, ButtonType } from './type';
+export {Button};
+export type {ButtonProps, ButtonSize, ButtonType} from './type';

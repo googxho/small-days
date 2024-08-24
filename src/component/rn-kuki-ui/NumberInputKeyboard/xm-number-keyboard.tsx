@@ -34,7 +34,7 @@ const color4CBC65 = '#4CBC65';
 const color389751 = '#389751';
 const colorA6A6A6 = '#A6A6A6';
 const colorA1A9B2 = '#A1A9B2';
-const Border3 = '#CCCCCC';
+const colorCCCCCC = '#CCCCCC';
 const isAndroid = Platform.OS === 'android'; // 判断是否为安卓
 // const isIOS = Platform.OS === 'ios'; // 判断是否为iOS
 
@@ -99,7 +99,7 @@ const KeyItem: React.FC<{
           borderRadius: 12,
           elevation: 3,
         }}
-        colors={canClick ? colors : [Border3, colorA6A6A6]}
+        colors={canClick ? colors : [colorCCCCCC, colorA6A6A6]}
         start={{x: 0, y: 0}}
         end={{x: 0, y: 1}}>
         {text ? (
